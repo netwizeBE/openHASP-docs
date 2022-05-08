@@ -1,0 +1,15 @@
+{
+    "name": "openHASP AZ-Touch MOD ILI9341",
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "improv": false,
+            "parts": [
+                {
+                    "path": "./az-touch-mod-esp32_ili9341_full_4MB_v0.6.3-rc1_5e333e8.bin",
+                    "offset": 0
+                }
+            ]
+        }
+    ]
+}

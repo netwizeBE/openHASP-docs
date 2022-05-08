@@ -1,0 +1,15 @@
+{
+    "name": "openHASP ESP32-TouchDown",
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "improv": false,
+            "parts": [
+                {
+                    "path": "./esp32-touchdown_full_4MB_v0.6.3-rc1_5e333e8.bin",
+                    "offset": 0
+                }
+            ]
+        }
+    ]
+}
