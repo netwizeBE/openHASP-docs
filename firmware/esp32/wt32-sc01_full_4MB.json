@@ -1,0 +1,15 @@
+{
+    "name": "openHASP WT32-SC01",
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "improv": false,
+            "parts": [
+                {
+                    "path": "./wt32-sc01_full_4MB_v0.6.3-rc1_5e333e8.bin",
+                    "offset": 0
+                }
+            ]
+        }
+    ]
+}

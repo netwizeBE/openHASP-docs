@@ -19,22 +19,70 @@
             color: #fff;
         }
         
+        input[type=checkbox] + label {
+        display: block;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+        }
+
+        input[type=checkbox] {
+        display: none;
+        }
+
+        input[type=checkbox] + label:before {
+        content: "\2714";
+        border: 0.1em solid #000;
+        border-radius: 0.2em;
+        display: inline-block;
+        width: 1.25em;
+        height: 1.25em;
+        padding-left: 0.1em;
+        padding-bottom: 0.25em;
+        margin-right: 0.2em;
+        vertical-align: bottom;
+        color: transparent;
+        transition: .2s;
+        border-color: #aaa;
+        }
+
+        input[type=checkbox] + label:active:before {
+        transform: scale(0);
+        }
+
+        input[type=checkbox]:checked + label:before {
+        background-color: #f00;
+        border-color: #f00;
+        color: #fff;
+        }
+
+        input[type=checkbox]:disabled + label:before {
+        transform: scale(1);
+        border-color: #aaa;
+        }
+
+        input[type=checkbox]:checked:disabled + label:before {
+        transform: scale(1);
+        background-color: #bfb;
+        border-color: #bfb;
+        }
+
         .sub {
             margin: -18px 0 18px 0;
             color: #09f;
         }
         
         select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='white'><polygon points='0,0 100,0 50,50'/></svg>") no-repeat;
-            background-size: 12px;
-            background-position: 206px 17px;
-            padding-left: 12px !important;
-            padding-right: 36px !important;
-            background-repeat: no-repeat;
             outline: none;
+            cursor: pointer;
+            padding: 8px;
+            margin: 10px;
+            font-family: Verdana, Helvetica, sans-serif;
+            font-size: 19px;
+            background-color: #333;
+            color: white;
+            border: 0px solid white;
+            border-radius: 25px;
         }
         
         select:-moz-focusring {
@@ -112,7 +160,7 @@
         
         .container {
             width: 80%;
-            max-width: 510px;
+            max-width: 500px;
             margin: auto;
             border-radius: 5px;
             box-sizing: border-box;
@@ -170,7 +218,12 @@
             left: 0;
             top: 0;
         }
-        
+      
+        #tips {
+            text-align: left;
+            padding: 1rem;
+        }
+
         #env {
             float: left;
         }
@@ -183,12 +236,13 @@
 
 <body onload="installerLoaded()">
     <div class="main">
-        <h2>Welcome to the openHASP download page!</h2>
+        <h2>openHASP Web Installer</h2>
+
+        <div>Select the device and flash size to install:</div>
 
         <div id="flasher">
-
             <div>
-                <select id="board" class="btn" onchange="setModel()">
+                <select id="board" onchange="setModel()">
                     <optgroup label="Boards">
                         <option data-manifest="esp32/arduitouch-esp32_ili9341_full" data-flashsize="[4]">AZ-Touch MOD ILI9341</option>
                         <option data-manifest="esp32/d1-mini-esp32_ili9341_full" data-flashsize="[4]">D1-mini ESP32 ILI9341</option>
@@ -205,32 +259,37 @@
                         <option data-manifest="esp32/makerfabs-tft35-cap_full" data-flashsize="[16]">Makerfabs TFT Touch 3.5" Cap</option>
                         <option data-manifest="esp32/wt32-sc01_full" data-flashsize="[4,16]">WT-SC01</option>
                         <option data-manifest="esp32/yeacreate-nscreen32_full" data-flashsize="[16]">Yeacreate Nscreen32</option>
-                        
                     </optgroup>
                 </select>
-                <select id="size" class="btn" onchange="setManifest()">
+                <select id="size" onchange="setManifest()">
                     <option value="4MB.json">4 MB</option>option>
                 </select>
-                <a id="link" href="../assets/firmware/arduitouch-esp32_ili9341_full_4MB_v0.6.2.bin" download="arduitouch-esp32_ili9341_full_4MB_v0.6.2.bin"><button class="md-button md-button--primary">Download Firmware</button></a>
             </div>
-            <h3>Browser install</h3>
+
             <div class="container inst-button">
-                <ol>
-                    <li>Plug in your ESP to a USB port. We will install openHASP 0.6.0 to it.</li>
-                    <li id="coms">Hit "Install" and select the correct COM port. <a onclick="showSerialHelp()">No device
+
+                <esp-web-install-button id="inst" manifest="assets/json/d1-mini-esp32_ili9341_full_4MB.json" hide-progress erase-first>
+                    <div id="clean" slot="activate" >
+                        <input type="checkbox" id="erase" name="erase" onchange="toggleErase()" checked>
+                        <label for="erase"> Erase flash before install</label><br>
+                    </div>
+                    <button slot="activate" class="md-button md-button--primary">Install Firmware</button>
+
+                </esp-web-install-button>
+                <span slot="not-allowed">Ah snap, you are not allowed to use this on HTTP!</span>
+                <a slot="activate"  id="link" href="../assets/firmware/arduitouch-esp32_ili9341_full_4MB_v0.6.2.bin" download="arduitouch-esp32_ili9341_full_4MB_v0.6.2.bin"><button class="md-button md-button--primary">Download Firmware</button></a>
+                <a slot="unsupported" id="link" href="../assets/firmware/arduitouch-esp32_ili9341_full_4MB_v0.6.2.bin" download="arduitouch-esp32_ili9341_full_4MB_v0.6.2.bin"><button class="md-button md-button--primary">Download Firmware</button></a>
+                <div slot="unsupported">This browser doesn't support Web Serial. Please use Chrome, Edge or Opera to install the firmware from the browser. </div>
+                <div slot="activate" id="tips">
+                    Installation steps:
+                </div>
+                <ol slot="activate">
+                    <li>Plug in your ESP to a USB port. We will install openHASP 0.6.3 to it.</li>
+                    <li id="coms">Click "Install Firmware" and select the correct COM port. <a onclick="showSerialHelp()">No device
                             found?</a>
                     </li>
                     <li>Wait a while, the process is a lot faster if you stay on this tab.</li>
                 </ol>
-                <esp-web-install-button id="inst" manifest="assets/json/d1-mini-esp32_ili9341_full_4MB.json" hide-progress erase-first>
-                    <button slot="activate" class="md-button md-button--primary">Install Firmware</button>
-                    <span slot="unsupported">Ah snap, your browser doesn't work!</span>
-                    <span slot="not-allowed">Ah snap, you are not allowed to use this on HTTP!</span>
-                </esp-web-install-button>
-                <div id="clean">
-                    <input type="checkbox" id="erase" name="erase" onchange="toggleErase()" checked>
-                    <label for="erase"> Clean install (deletes all files and settings)</label><br>
-                </div>
             </div>
 
             <div class="container log">
