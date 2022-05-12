@@ -35,6 +35,7 @@
       }
       .invisible {
         visibility: hidden;
+        display: none;
       }
       .hidden {
         display: none;
@@ -64,6 +65,18 @@
       table td:nth-child(2) { text-align: end; }
       td {
         padding: 0.25rem 1.2rem;
+      }
+
+      button {
+        position: relative;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 28px;
+    color: var(--esp-tools-button-text-color, #fff);
+    background-color: var(--esp-tools-button-color, #03a9f4);
+    border: none;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 3px 1px -2px, rgba(0, 0, 0, 0.2) 0px 1px 5px 0px;
       }
 
 tr {
@@ -105,7 +118,7 @@ tr.selected:hover {
         </style>
     </head>
     
-    <body>
+    <body onload="installerLoaded()">
       <div class="content">
         <h1>openHASP Web installer</h1>
   
@@ -119,23 +132,30 @@ tr.selected:hover {
               <tr><td>D1 R32 Espduino<select hidden name="firmware"><option value="d1-r32-waveshare">d1-r32-waveshare</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9486">ILI9486</option><option value="ST7789">ST7789</option></select></td><td>XPT2406</td></tr>
               <tr><td>ESP32 D1-mini<select hidden name="firmware"><option value="d1-mini-esp32">d1-mini-esp32</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
               <tr><td>ESP32 One<select hidden name="firmware"><option value="esp32-one">esp32-one</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9486">ILI9486</option><option value="ST7796">ST7796</option></select></td><td>XPT2406</td></tr>
-              <tr><td>ESP32 Touchdown<select hidden name="firmware"><option value="esp32-touchdown">esp32-touchdown</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value="ILI9488">ILI9488</option></select></td><td>FT6236</td></tr>
-              <tr><td>Featherwing<select  name="firmware"><option value="huzzah32-featherwing-24">2.4</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>STMPE610</td></tr>
-              <tr><td>FreeTouchDeck<select hidden name="firmware"><option value="freetouchdeck">freetouchdeck</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="8MB">8 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value="ILI9488">ILI9488</option></select></td><td>XPT2406</td></tr>
-              <tr><td>Lanbon L8<select hidden name="firmware"><option value="lanbon_l8">lanbon_l8</option></select></td><td>8 MB<select hidden class="flash" ><option value="8MB">8 MB</option></select></td><td>ST7789V<select hidden class="display" ><option value="ST7789V">ST7789V</option></select></td><td>FT5206</td></tr>
+              <tr><td>ESP32 Touchdown<select hidden name="firmware"><option value="esp32-touchdown">esp32-touchdown</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>FT6236</td></tr>
+              <tr><td>FreeTouchDeck<select hidden name="firmware"><option value="freetouchdeck">freetouchdeck</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="8MB">8 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>XPT2406</td></tr>
+              <tr><td>Featherwing<select  name="firmware"><option value="huzzah32-featherwing-24">huzzah32-featherwing-24</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value=""></option></select></td><td>STMPE610</td></tr>
+              <tr><td>Lanbon L8<select hidden name="firmware"><option value="lanbon_l8">lanbon_l8</option></select></td><td>8 MB<select hidden class="flash" ><option value="8MB">8 MB</option></select></td><td>ST7789V<select hidden class="display" ><option value=""></option></select></td><td>FT5206</td></tr>
               <tr><td>Lolin D32 Pro v2<select hidden name="firmware"><option value="lolin-d32-pro">lolin-d32-pro</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
-              <tr><td>M5Stack Core2<select hidden name="firmware"><option value="m5stack-core2">m5stack-core2</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9342C<select hidden class="display" ><option value="ILI9342C">ILI9342C</option></select></td><td>FT6336U</td></tr>
-              <tr><td>Makerfabs TFT Touch<select hidden name="firmware"><option value="makerfabs-tft35-cap">makerfabs-tft35-cap</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value="ILI9488">ILI9488</option></select></td><td>FT</td></tr>
+              <tr><td>M5Stack Core2<select hidden name="firmware"><option value="m5stack-core2">m5stack-core2</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9342C<select hidden class="display" ><option value=""></option></select></td><td>FT6336U</td></tr>
+              <tr><td>Makerfabs TFT Touch<select hidden name="firmware"><option value="makerfabs-tft35-cap">makerfabs-tft35-cap</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>FT</td></tr>
               <tr><td>TTGO T7 v1.5<select hidden name="firmware"><option value="ttgo-t7-v1.5">ttgo-t7-v1.5</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="16MB">16 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
-              <tr><td>WT32-S01<select hidden name="firmware"><option value="wt32-sc01">wt32-sc01</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="16MB">16 MB</option></select></td><td>ST7796<select hidden class="display" ><option value="ST7796">ST7796</option></select></td><td>FT6336U</td></tr>
-              <tr><td>Yeacreate Nscreen32<select hidden name="firmware"><option value="yeacreate-nscreen32">yeacreate-nscreen32</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ST7796<select hidden class="display" ><option value="ST7796">ST7796</option></select></td><td>GT911</td></tr>
+              <tr><td>WT32-SC01<select hidden name="firmware"><option value="wt32-sc01">wt32-sc01</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="16MB">16 MB</option></select></td><td>ST7796<select hidden class="display" ><option value=""></option></select></td><td>FT6336U</td></tr>
+              <tr><td>Yeacreate Nscreen32<select hidden name="firmware"><option value="yeacreate-nscreen32">yeacreate-nscreen32</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ST7796<select hidden class="display" ><option value=""></option></select></td><td>GT911</td></tr>
                  
 </table>
 
 <p id="firmware"></p>
 
 <p class="button-row" align="center">
-  <esp-web-install-button class="invisible" install-unsupported=""></esp-web-install-button>
+  <button>Download Firmware</button>
+
+  <esp-web-install-button class="invisible" install-unsupported="" id="inst">
+  <div id="clean" slot="activate" >
+    <input type="checkbox" id="erase" name="erase" onchange="toggleErase()" checked>
+    <label for="erase"> Erase flash before install</label><br>
+  </div>
+  </esp-web-install-button>
 </p>
 
 <div class="footer">
@@ -166,16 +186,18 @@ tr.selected:hover {
         // let flash = document.getElementById('flash');
         flash = item.value
       });
-     
+
+      if (display != "") display = "_" + display;
+      if (flash != "") flash = "_" + flash;
 
       let manifest = "firmware/esp32/" + firmware + "_" + display + "_full_" + flash + ".json";
       
       const button = document.querySelector('esp-web-install-button');
           button.manifest = manifest;
-          button.classList.remove('invisible');
+        //  button.classList.remove('invisible');
       
       var bin = document.getElementById("firmware");
-      bin.innerHTML = "<b>Selected firmware:</b> " +firmware + "_" + display + "_full_" + flash + "_v0.6.3-rc1_5e333e8.bin"
+      bin.innerHTML = "<b>Selected firmware:</b> " +firmware + display + "_full" + flash + "_v0.6.3-rc1_5e333e8.bin"
       })
   }
 

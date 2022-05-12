@@ -138,7 +138,7 @@ function checkSupported() {
 
 function unsupported() {
     // document.getElementById('flasher').innerHTML = "Sorry, your browser is not yet supported!<br>Please try on Desktop Chrome or Edge.<br>"
-    document.getElementById('flasher').style.display = "none";
+    document.getElementById('inst').style.display = "none";
 }
 
 function showSerialHelp() {
