@@ -1,5 +1,5 @@
 {
-    "name": "openHASP Huzzah32 2.4&quot; Featherwing",
+    "name": "openHASP Huzzah32 2.4\" Featherwing",
     "builds": [
         {
             "chipFamily": "ESP32",

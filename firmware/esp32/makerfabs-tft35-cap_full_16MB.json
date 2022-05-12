@@ -1,5 +1,5 @@
 {
-    "name": "openHASP Makerfabs TFT 3.5&quot; Cap",
+    "name": "openHASP Makerfabs TFT 3.5\" Cap",
     "builds": [
         {
             "chipFamily": "ESP32",
