@@ -10,12 +10,8 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "freetouchdeck_full_4MB_v0.6.3-rc2_8459b63.bin",
+                    "path": "freetouchdeck_full_8MB_v0.6.3-rc2_8459b63.bin",
                     "offset": 0
-                },
-                {
-                    "path": "partitions_8MB.bin",
-                    "offset": 32768
                 }
             ]
         }

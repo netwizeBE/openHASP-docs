@@ -1,5 +1,5 @@
 {
-    "name": "openHASP FreeTouchDeck",
+    "name": "openHASP TTGO T7 v1.5",
     "version": "v0.6.3-rc2",
     "home_assistant_domain": "openhasp",
     "funding_url": "https://ko-fi.com/openhasp",
@@ -10,8 +10,12 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "freetouchdeck_full_4MB_v0.6.3-rc2_8459b63.bin",
+                    "path": "ttgo-t7-v1.5_ili9341_full_4MB_v0.6.3-rc2_8459b63.bin",
                     "offset": 0
+                },
+                {
+                    "path": "partitions_16MB.bin",
+                    "offset": 32768
                 }
             ]
         }

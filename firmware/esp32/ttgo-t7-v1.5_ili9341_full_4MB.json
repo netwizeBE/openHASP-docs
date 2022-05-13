@@ -10,20 +10,8 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "bootloader_dio_40m.bin",
-                    "offset": 4096
-                },
-                {
-                    "path": "partitions_4MB.bin",
-                    "offset": 32768
-                },
-                {
-                    "path": "boot_app0.bin",
-                    "offset": 57344
-                },
-                {
-                    "path": "ttgo-t7-v1.5_ili9341_ota_v0.6.3-rc2_8459b63.bin",
-                    "offset": 65536
+                    "path": "ttgo-t7-v1.5_ili9341_full_4MB_v0.6.3-rc2_8459b63.bin",
+                    "offset": 0
                 }
             ]
         }

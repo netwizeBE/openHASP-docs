@@ -10,20 +10,8 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "bootloader_dio_40m.bin",
-                    "offset": 4096
-                },
-                {
-                    "path": "partitions_16MB.bin",
-                    "offset": 32768
-                },
-                {
-                    "path": "boot_app0.bin",
-                    "offset": 57344
-                },
-                {
-                    "path": "wt32-sc01_ota_v0.6.3-rc2_6da43d8.bin",
-                    "offset": 65536
+                    "path": "wt32-sc01_full_4MB_v0.6.3-rc2_8459b63.bin",
+                    "offset": 0
                 }
             ]
         }
