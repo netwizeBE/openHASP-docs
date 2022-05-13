@@ -116,29 +116,27 @@ function reset() {
     document.getElementById('reset-button').style.display = "none";
 }
 
-function checkSupported() {
-    var elemenent = document.getElementById('inst');
-    let supported = false;
-
-    if (typeof(element) != 'undefined' && element != null) {
-        if (elemenent, hasAttribute('install-unsupported')) {
-            unsupported();
-        } else {
-            supported = true;
-        }
-    }
-    if (supported) {
-        console.log('The browser does not support web installer');
-    } else {
-        console.log('The browser does not support web installer');
-    }
-}
-
-
 
 function unsupported() {
     // document.getElementById('flasher').innerHTML = "Sorry, your browser is not yet supported!<br>Please try on Desktop Chrome or Edge.<br>"
     document.getElementById('inst').style.display = "none";
+    document.getElementById('clean').style.display = "none";
+    document.getElementById('support').style.display = "block";
+}
+
+function checkSupported() {
+    const button = document.querySelector('esp-web-install-button');
+
+    if (typeof(button) != 'undefined' && button != null) {
+        if (button.hasAttribute('install-supported')) {
+          console.log('The browser does support web installer');
+      } else {
+          unsupported();
+          console.log('The browser does not support web installer');
+        }
+    } else {
+        console.log('Web Install button not found');
+    }
 }
 
 function showSerialHelp() {
