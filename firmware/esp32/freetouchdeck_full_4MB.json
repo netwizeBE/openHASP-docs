@@ -6,7 +6,7 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "./freetouchdeck_full_4MB_v0.6.3-rc1_5e333e8.bin",
+                    "path": "https://github.com/HASwitchPlate/openHASP/releases/download/v0.6.2/freetouchdeck_full_4MB_v0.6.2.bin",
                     "offset": 0
                 }
             ]

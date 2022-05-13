@@ -12,94 +12,93 @@
         <script src="./installer.js"></script>
     
         <style>
-       body {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Ubuntu, sans-serif;
-        padding: 0;
-        margin: 0;
-        line-height: 1.4;
-      }
-      .content {
-        max-width: 640px;
-        margin: auto;
-        padding: 12px;        text-align: center;
+        body {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+          padding: 0;
+          margin: 0;
+          line-height: 1.4;
+        }
+        .content {
+          max-width: 640px;
+          margin: auto;
+          padding: 12px;        
+          text-align: center;
+        }
+        h2 {
+          margin-top: 2em;
+        }
+        h3 {
+          margin-top: 1.5em;
+        }
+        a, a:visited {
+          color: rgb(0, 189, 214);
+        }
+        .invisible {
+          visibility: hidden;
+          display: none;
+        }
+        .hidden {
+          display: none;
+        }
 
-      }
-      h2 {
-        margin-top: 2em;
-      }
-      h3 {
-        margin-top: 1.5em;
-      }
-      a, a:visited {
-        color: rgb(0, 189, 214);
-      }
-      .invisible {
-        visibility: hidden;
-        display: none;
-      }
-      .hidden {
-        display: none;
-      }
+        .footer {
+          margin-top: 24px;
+          border-top: 1px solid #888;
+          padding-top: 24px;
+          text-align: center;
+        }
+        .footer .initiative {
+          font-style: italic;
+          margin-top: 16px;
+        }
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width:100%
+        }
+        table td:nth-child(2) { text-align: end; }
+        td {
+          padding: 0.25rem 1.2rem;
+        }
 
-      .footer {
-        margin-top: 24px;
-        border-top: 1px solid #888;
-        padding-top: 24px;
-        text-align: center;
-      }
-      .footer .initiative {
-        font-style: italic;
-        margin-top: 16px;
-      }
-      table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        width:100%
-      }
-      table td:nth-child(2) { text-align: end; }
-      td {
-        padding: 0.25rem 1.2rem;
-      }
-
-      .container {
-        width: 100%;
-        display: none;
-      }
+        .container {
+          width: 100%;
+          display: none;
+        }
         
         .inst-button {
-            padding: 5px 0;
-            position: relative;
+          padding: 5px 0;
+          position: relative;
         }
 
       button {
-      justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
-    margin: 5px;
-    padding: 8px 28px;
-    color: var(--esp-tools-button-text-color, #fff);
-    background-color: rgb(0, 189, 214);
-    border: none;
-    border-radius: 4px;
-    box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 3px 1px -2px, rgba(0, 0, 0, 0.2) 0px 1px 5px 0px;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+        padding: 8px 28px;
+        color: var(--esp-tools-button-text-color, #fff);
+        background-color: rgb(0, 189, 214);
+        border: none;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 3px 1px -2px, rgba(0, 0, 0, 0.2) 0px 1px 5px 0px;
       }
 
-tr {
-  border-bottom: 1px solid #888;
-}
-tr:hover {
-    background-color: rgba(0, 189, 214, 0.25);
-    color: #FFF;
-}
-tr.selected {
-  background-color: rgba(0, 189, 214, 0.90);
-    color: #FFF;
-}
-tr.selected:hover {
-  background-color: rgba(0, 189, 214, 0.75);
-    color: #FFF;
-}
+      tr {
+        border-bottom: 1px solid #888;
+      }
+      tr:hover {
+          background-color: rgba(0, 189, 214, 0.25);
+          color: #FFF;
+      }
+      tr.selected {
+        background-color: rgba(0, 189, 214, 0.90);
+          color: #FFF;
+      }
+      tr.selected:hover {
+        background-color: rgba(0, 189, 214, 0.75);
+          color: #FFF;
+      }
       .radios li {
         list-style: none;
         line-height: 2em;
@@ -121,7 +120,7 @@ tr.selected:hover {
       .display{
         width:100%;
       }
-        </style>
+      </style>
     </head>
     
     <body onload="installerLoaded()">
@@ -236,7 +235,7 @@ tr.selected:hover {
               if(typeof index !== "undefined"){
                   table.rows[index].classList.toggle("selected");
               }
-            //  console.log(typeof index);
+              // console.log(typeof index);
               // get the selected row index
               index = this.rowIndex;
               // add class selected to the row
@@ -250,25 +249,30 @@ tr.selected:hover {
   }
   selectedRow();
 
-      document.querySelectorAll('select[class=flash]').forEach(sel =>
-        sel.addEventListener("change", (sel) => {
-          // console.log(sel);
-          // let flash = document.getElementById('flash');
-          // flash.value = sel.target.value
-          updateSelected();
-        }
-      ));
-      
-      document.querySelectorAll('select[class=display]').forEach(sel =>
-        sel.addEventListener("change", (sel) => {
-        // console.log(sel);
-        // let display = document.getElementById('display');
-        // display.value = sel.target.value
-        updateSelected();
-        }
-      ));
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const fw = urlParams.get('fw')
+  console.log(fw);
 
-        </script>
+  document.querySelectorAll('select[class=flash]').forEach(sel =>
+    sel.addEventListener("change", (sel) => {
+      // console.log(sel);
+      // let flash = document.getElementById('flash');
+      // flash.value = sel.target.value
+      updateSelected();
+    }
+  ));
+  
+  document.querySelectorAll('select[class=display]').forEach(sel =>
+    sel.addEventListener("change", (sel) => {
+    // console.log(sel);
+    // let display = document.getElementById('display');
+    // display.value = sel.target.value
+    updateSelected();
+    }
+  ));
+
 </script>
 
 </body>
