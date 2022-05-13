@@ -1,6 +1,6 @@
 {
     "name": "openHASP WT32-SC01",
-    "version": "v0.6.3-rc1",
+    "version": "v0.6.3-rc2",
     "home_assistant_domain": "openhasp",
     "funding_url": "https://ko-fi.com/openhasp",
     "new_install_prompt_erase": true,
@@ -22,7 +22,7 @@
                     "offset": 57344
                 },
                 {
-                    "path": "wt32-sc01_pta_v0.6.3-rc1_5e333e8.bin",
+                    "path": "wt32-sc01_ota_v0.6.3-rc2_6da43d8.bin",
                     "offset": 65536
                 }
             ]
