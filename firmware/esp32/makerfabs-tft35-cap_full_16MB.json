@@ -1,13 +1,29 @@
 {
     "name": "openHASP Makerfabs TFT 3.5\" Cap",
+    "version": "v0.6.3-rc1",
+    "home_assistant_domain": "openhasp",
+    "funding_url": "https://ko-fi.com/openhasp",
+    "new_install_prompt_erase": true,
     "builds": [
         {
             "chipFamily": "ESP32",
             "improv": false,
             "parts": [
                 {
-                    "path": "./makerfabs-tft35-cap_full_16MB_v0.6.3-rc1_5e333e8.bin",
-                    "offset": 0
+                    "path": "bootloader_dio_40m.bin",
+                    "offset": 4096
+                },
+                {
+                    "path": "partitions_16MB.bin",
+                    "offset": 32768
+                },
+                {
+                    "path": "boot_app0.bin",
+                    "offset": 57344
+                },
+                {
+                    "path": "makerfabs-tft35-cap_ota_v0.6.3-rc1_5e333e8.bin",
+                    "offset": 65536
                 }
             ]
         }
