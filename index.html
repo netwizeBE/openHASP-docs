@@ -205,14 +205,14 @@
       if (display != "") display = "_" + display;
       if (flash != "") flash = "_" + flash;
 
-      let manifest = "firmware/esp32/" + firmware + "_" + display + "_full_" + flash + ".json";
+      let manifest = "firmware/esp32/" + firmware + display + "_full" + flash + ".json";
       
       const button = document.querySelector('esp-web-install-button');
           button.manifest = manifest;
         //  button.classList.remove('invisible');
       
       var bin = document.getElementById("firmware");
-      bin.innerHTML = "<b>Selected firmware:</b> " +firmware + display + "_full" + flash + "_v0.6.3-rc1_5e333e8.bin";
+      bin.innerHTML = "<b>Selected firmware:</b> " + firmware + display + "_full" + flash + "_v0.6.3-rc1_5e333e8.bin";
 
       var link = document.getElementById("link");
       link.href =  "firmware/esp32/" + firmware + display + "_full" + flash + "_v0.6.3-rc1_5e333e8.bin";
