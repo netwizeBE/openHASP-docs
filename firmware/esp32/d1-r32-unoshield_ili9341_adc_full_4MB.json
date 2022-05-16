@@ -9,7 +9,7 @@
         "improv": false,
         "parts": [
             {
-                "path": "lanbon_l8_full_8MB_v0.6.3-rc2_558a984.bin",
+                "path": "d1-r32-unoshield_ili9341_adc_full_4MB_v0.6.3-rc2_558a984.bin",
                 "offset": 0
             }
         ]

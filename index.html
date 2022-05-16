@@ -126,7 +126,11 @@
     <body onload="installerLoaded()">
       <div class="content">
         <h1>openHASP Web installer</h1>
-  
+
+        <p>Version: <select id="version" name="version">
+          <option value="v0.6.3-rc2_558a984">0.6.3-rc2 (558a984)</option>      
+        </select></p>
+
         <div>
 
           <table id="table">
@@ -139,7 +143,7 @@
               <tr><td>ESP32 One<select hidden name="firmware"><option value="esp32-one">esp32-one</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9486">ILI9486</option><option value="ST7796">ST7796</option></select></td><td>XPT2406</td></tr>
               <tr><td>ESP32 Touchdown<select hidden name="firmware"><option value="esp32-touchdown">esp32-touchdown</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>FT6236</td></tr>
               <tr><td>FreeTouchDeck<select hidden name="firmware"><option value="freetouchdeck">freetouchdeck</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="8MB">8 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>XPT2406</td></tr>
-              <tr><td>Featherwing<select  name="firmware"><option value="huzzah32-featherwing-24">huzzah32-featherwing-24</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value=""></option></select></td><td>STMPE610</td></tr>
+              <tr><td>Featherwing<select  name="firmware"><option value="huzzah32-featherwing-24">2.4</option><option value="huzzah32-featherwing-35">3.5</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value=""></option></select></td><td>STMPE610</td></tr>
               <tr><td>Lanbon L8<select hidden name="firmware"><option value="lanbon_l8">lanbon_l8</option></select></td><td>8 MB<select hidden class="flash" ><option value="8MB">8 MB</option></select></td><td>ST7789V<select hidden class="display" ><option value=""></option></select></td><td>FT5206</td></tr>
               <tr><td>Lolin D32 Pro v2<select hidden name="firmware"><option value="lolin-d32-pro">lolin-d32-pro</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
               <tr><td>M5Stack Core2<select hidden name="firmware"><option value="m5stack-core2">m5stack-core2</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9342C<select hidden class="display" ><option value=""></option></select></td><td>FT6336U</td></tr>
@@ -151,7 +155,10 @@
 </table>
 
 
-<p id="firmware"><b>Select your device</b></p>
+<p>
+  <div id="firmware"><b>Select your device</b></div>
+  <div id="ota"><b></b></div>
+</p>
 
 <div class="container" id="inst-button">
   <esp-web-install-button id="inst" manifest="assets/json/d1-mini-esp32_ili9341_full_4MB.json" hide-progress>
@@ -162,17 +169,12 @@
 
   <a id="link" href=""><button>DOWNLOAD</button></a>
 
-  <div id="clean">
-      <input type="checkbox" id="erase" name="erase" onchange="toggleErase()">
-      <label for="erase"> Erase flash before install</label><br>
-  </div>
-
   <div class="container" id="support">Chrome and Edge support flashing devices online from within the browser window.</br>Please use another browser or click 'Download' to flash the firmware offline.</div>
 
 </div>
 
 <div class="footer">
-  <a href="https://openhasp.haswitchplate.com/0.6.3/">openHASP v0.6.3-rc2</a> Web Installer powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+  <a href="https://www.openhasp.com/0.6.3/">openHASP v0.6.3-rc2</a> Web Installer powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
 </div>
 
 </div>
@@ -211,11 +213,16 @@
           button.manifest = manifest;
         //  button.classList.remove('invisible');
       
+      var version = document.getElementById("version");
+
       var bin = document.getElementById("firmware");
-      bin.innerHTML = "<b>Selected firmware:</b> " + firmware + display + "_full" + flash + "_v0.6.3-rc2_8459b63.bin";
+      bin.innerHTML = "<b>Full firmware:</b> " + firmware + display + "_full" + flash + "_" + version.value + ".bin";
+
+      var ota = document.getElementById("ota");
+      ota.innerHTML = "<b>OTA firmware:</b> " + firmware + display + "_ota_" + version.value + ".bin";
 
       var link = document.getElementById("link");
-      link.href =  "firmware/esp32/" + firmware + display + "_full" + flash + "_v0.6.3-rc2_8459b63.bin";
+      link.href =  "firmware/esp32/" + firmware + display + "_full" + flash + "_" + version.value + ".bin";
 
       var buttons = document.getElementById("inst-button");
       buttons.style.display = 'block';
@@ -275,5 +282,8 @@
 
 </script>
 
+<!--  Cloudflare Pages Analytics -->
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;d3f3022be44d4b60a45cc30ab8c72ed4&quot;}"></script>
+<!--  Cloudflare Pages Analytics -->
 </body>
 </html>

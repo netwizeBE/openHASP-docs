@@ -120,7 +120,7 @@ function reset() {
 function unsupported() {
     // document.getElementById('flasher').innerHTML = "Sorry, your browser is not yet supported!<br>Please try on Desktop Chrome or Edge.<br>"
     document.getElementById('inst').style.display = "none";
-    document.getElementById('clean').style.display = "none";
+    // document.getElementById('clean').style.display = "none";
     document.getElementById('support').style.display = "block";
 }
 
