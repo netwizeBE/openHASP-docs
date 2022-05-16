@@ -1,17 +1,13 @@
 {
-    "name": "openHASP",
-    "version": "v0.6.3",
-    "home_assistant_domain": "openhasp",
-    "funding_url": "https://ko-fi.com/openhasp",
-    "new_install_prompt_erase": true,
-    "builds": {
+    "name": "Squeezelite-ESP32 for Muse",
+    "version": "1.1023",
+    "home_assistant_domain": "slim_player",
+    "builds": [
+      {
         "chipFamily": "ESP32",
-        "improv": false,
         "parts": [
-            {
-                "path": "m5stack-core2_full_16MB_v0.6.3-rc2_558a984.bin",
-                "offset": 0
-            }
+          { "path": "m5stack-core2_full_16MB_v0.6.3-rc2_558a984.bin", "offset": 0 }
         ]
-    }
-}
+      }
+    ]
+  }
