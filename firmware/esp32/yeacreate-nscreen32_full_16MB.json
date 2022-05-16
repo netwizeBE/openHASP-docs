@@ -4,14 +4,16 @@
     "home_assistant_domain": "openhasp",
     "funding_url": "https://ko-fi.com/openhasp",
     "new_install_prompt_erase": true,
-    "builds": {
-        "chipFamily": "ESP32",
-        "improv": false,
-        "parts": [
-            {
-                "path": "yeacreate-nscreen32_full_16MB_v0.6.3-rc2_558a984.bin",
-                "offset": 0
-            }
-        ]
-    }
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "improv": false,
+            "parts": [
+                {
+                    "path": "yeacreate-nscreen32_full_16MB_v0.6.3-rc2_558a984.bin",
+                    "offset": 0
+                }
+            ]
+        }
+    ]
 }
