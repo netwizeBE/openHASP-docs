@@ -123,7 +123,7 @@
       </style>
     </head>
     
-    <body onload="installerLoaded()">
+    <body onload="installerLoaded();updateFirmware();">
       <div class="content">
         <h1>openHASP Web installer</h1>
 
@@ -143,7 +143,7 @@
               <tr><td>ESP32 One<select hidden name="firmware"><option value="esp32-one">esp32-one</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9486">ILI9486</option><option value="ST7796">ST7796</option></select></td><td>XPT2406</td></tr>
               <tr><td>ESP32 Touchdown<select hidden name="firmware"><option value="esp32-touchdown">esp32-touchdown</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>FT6236</td></tr>
               <tr><td>FreeTouchDeck<select hidden name="firmware"><option value="freetouchdeck">freetouchdeck</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="8MB">8 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>XPT2406</td></tr>
-              <tr><td>Featherwing<select  name="firmware"><option value="huzzah32-featherwing-24">2.4</option><option value="huzzah32-featherwing-35">3.5</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value=""></option></select></td><td>STMPE610</td></tr>
+              <tr><td>Featherwing&nbsp;<select name="firmware" class="firmware"><option value="huzzah32-featherwing-24">2.4</option><option value="huzzah32-featherwing-35">3.5</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><span class="display">ILI9341</span><select hidden class="display" ><option value=""></option></select></td><td>STMPE610</td></tr>
               <tr><td>Lanbon L8<select hidden name="firmware"><option value="lanbon_l8">lanbon_l8</option></select></td><td>8 MB<select hidden class="flash" ><option value="8MB">8 MB</option></select></td><td>ST7789V<select hidden class="display" ><option value=""></option></select></td><td>FT5206</td></tr>
               <tr><td>Lolin D32 Pro v2<select hidden name="firmware"><option value="lolin-d32-pro">lolin-d32-pro</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
               <tr><td>M5Stack Core2<select hidden name="firmware"><option value="m5stack-core2">m5stack-core2</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9342C<select hidden class="display" ><option value=""></option></select></td><td>FT6336U</td></tr>
@@ -182,8 +182,30 @@
 
 
 <script>
+  function updateFirmware(){
+      document.querySelectorAll('tr').forEach(function(row) {
+        row.querySelectorAll('select[name="firmware"]').forEach(function(item) {
+          // let firmware = document.getElementById('firmware');
+          firmware = item.value.toLowerCase();
+
+          // Adjust Display driver for Featherwing displays
+          if (firmware == 'huzzah32-featherwing-24') {
+            row.querySelectorAll('span[class="display"]').forEach(function(span) {
+              span.innerHTML = 'ILI9341';
+            });
+          }
+          if (firmware == 'huzzah32-featherwing-35') {
+            row.querySelectorAll('span[class="display"]').forEach(function(span) {
+              span.innerHTML = 'HX8357D';
+            });
+          }
+
+        });
+      });
+  }
+
   function updateSelected(){
-    checkSupported();
+    updateFirmware();
     document.querySelectorAll('tr[class="selected"]').forEach( row => {
       let firmware="";
       let display="";
@@ -255,12 +277,22 @@
       
   }
   selectedRow();
+  updateSelected();
 
   const queryString = window.location.search;
   console.log(queryString);
   const urlParams = new URLSearchParams(queryString);
   const fw = urlParams.get('fw')
   console.log(fw);
+
+  document.querySelectorAll('select[class=firmware]').forEach(sel =>
+    sel.addEventListener("change", (sel) => {
+      // console.log(sel);
+      // let flash = document.getElementById('flash');
+      // flash.value = sel.target.value
+      updateSelected();
+    }
+  ));
 
   document.querySelectorAll('select[class=flash]').forEach(sel =>
     sel.addEventListener("change", (sel) => {
