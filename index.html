@@ -128,7 +128,7 @@
         <h1>openHASP Web installer</h1>
 
         <p>Version: <select id="version" name="version">
-          <option value="v0.6.3-rc2_558a984">0.6.3-rc2 (558a984)</option>      
+          <option value="v0.6.3-rc2_fdfdfd3">0.6.3-rc2 (558a984)</option>      
         </select></p>
 
         <div>
@@ -207,7 +207,7 @@
       if (display != "") display = "_" + display;
       if (flash != "") flash = "_" + flash;
 
-      let manifest = "firmware/esp32/" + firmware + display + "_full" + flash + ".json";
+      let manifest = "firmware/" + firmware + display + "_full" + flash + ".json";
       
       const button = document.querySelector('esp-web-install-button');
           button.manifest = manifest;
@@ -222,7 +222,7 @@
       ota.innerHTML = "<b>OTA firmware:</b> " + firmware + display + "_ota_" + version.value + ".bin";
 
       var link = document.getElementById("link");
-      link.href =  "firmware/esp32/" + firmware + display + "_full" + flash + "_" + version.value + ".bin";
+      link.href =  "firmware/" + firmware + display + "_full" + flash + "_" + version.value + ".bin";
 
       var buttons = document.getElementById("inst-button");
       buttons.style.display = 'block';
