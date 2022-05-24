@@ -258,11 +258,13 @@
       
       var version = document.getElementById("version");
 
+      var bin_file = firmware + display + "_full" + flash + "_" + version.value + ".bin";
       var bin = document.getElementById("firmware");
-      bin.innerHTML = "<b>Full firmware:</b> " + firmware + display + "_full" + flash + "_" + version.value + ".bin";
+      bin.innerHTML = "<b>Full firmware:</b> <a href=\"firmware/" + bin_file + "\">" + bin_file + "</a>";
 
+      var ota_file = firmware + display + "_ota_" + version.value + ".bin"
       var ota = document.getElementById("ota");
-      ota.innerHTML = "<b>OTA firmware:</b> " + firmware + display + "_ota_" + version.value + ".bin";
+      ota.innerHTML = "<b>OTA firmware:</b> <a href=\"firmware/" + ota_file + "\">" + ota_file + "</a>";
 
       var link = document.getElementById("link");
       link.href =  "firmware/" + firmware + display + "_full" + flash + "_" + version.value + ".bin";
