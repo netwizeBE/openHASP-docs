@@ -10,7 +10,7 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "esp32-one_st7796_full_4MB_v0.6.3-rc2_fdfdfd3.bin",
+                    "path": "esp32-one_st7796_full_4MB_v0.6.3-rc3_1c86a3a.bin",
                     "offset": 0
                 }
             ]
