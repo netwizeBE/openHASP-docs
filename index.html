@@ -88,16 +88,19 @@
         border-bottom: 1px solid #888;
       }
       tr:hover {
-          background-color: rgba(0, 189, 214, 0.25);
-          color: #FFF;
+        background-color: rgba(0, 0, 0, 0.0);
+        color: #FFF;
       }
-      tr.selected {
+      tr.skip:hover {
+        background-color: rgba(0, 189, 214, 0.25);
+        color: #FFF;
+      }      tr.selected {
         background-color: rgba(0, 189, 214, 0.90);
-          color: #FFF;
+        color: #FFF;
       }
       tr.selected:hover {
         background-color: rgba(0, 189, 214, 0.75);
-          color: #FFF;
+        color: #FFF;
       }
       .radios li {
         list-style: none;
@@ -107,9 +110,6 @@
         body {
           background-color: #333;
           color: #fff;
-        }
-        a {
-          color: #58a6ff;
         }
       }
 
