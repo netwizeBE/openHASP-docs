@@ -1,6 +1,6 @@
 {
     "name": "openHASP",
-    "version": "v0.6.3",
+    "version": "v0.6.3_497f61",
     "home_assistant_domain": "openhasp",
     "funding_url": "https://ko-fi.com/openhasp",
     "new_install_prompt_erase": true,
@@ -10,7 +10,7 @@
             "improv": false,
             "parts": [
                 {
-                    "path": "esp32-touchdown_full_4MB_v0.6.3-rc3_1c86a3a.bin",
+                    "path": "esp32-touchdown_full_4MB_v0.6.3_497f611.bin",
                     "offset": 0
                 }
             ]
