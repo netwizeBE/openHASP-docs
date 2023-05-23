@@ -1,0 +1,19 @@
+{
+    "name": "openHASP",
+    "version": "v0.6.3_497f61",
+    "home_assistant_domain": "openhasp",
+    "funding_url": "https://ko-fi.com/openhasp",
+    "new_install_prompt_erase": true,
+    "builds": [
+        {
+            "chipFamily": "ESP32",
+            "improv": false,
+            "parts": [
+                {
+                    "path": "/firmware/yeacreate-nscreen32_full_16MB_v0.6.3_497f611.bin",
+                    "offset": 0
+                }
+            ]
+        }
+    ]
+}

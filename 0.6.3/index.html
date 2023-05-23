@@ -1,0 +1,346 @@
+<html>
+    <!DOCTYPE html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta content='width=device-width' name='viewport'>
+        <meta name="theme-color" content="#222222">
+
+        <link rel="icon" href="http://www.openhasp.com/0.6.3/favicon.ico">
+        <title>Install openHASP</title>
+    
+        <script type="module" src="https://unpkg.com/esp-web-tools@8.0.2/dist/web/install-button.js?module"></script>
+        <script src="./installer.js"></script>
+    
+        <style>
+        body {
+          font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+          padding: 0;
+          margin: 0;
+          line-height: 1.4;
+        }
+        .content {
+          max-width: 640px;
+          margin: auto;
+          padding: 12px;        
+          text-align: center;
+        }
+        h2 {
+          margin-top: 2em;
+        }
+        h3 {
+          margin-top: 1.5em;
+        }
+        a, a:visited {
+          color: rgb(0, 189, 214);
+        }
+        .invisible {
+          visibility: hidden;
+          display: none;
+        }
+        .hidden {
+          display: none;
+        }
+
+        .footer {
+          margin-top: 24px;
+          border-top: 1px solid #888;
+          padding-top: 24px;
+          text-align: center;
+        }
+        .footer .initiative {
+          font-style: italic;
+          margin-top: 16px;
+        }
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width:100%
+        }
+        table td:nth-child(2) { text-align: end; }
+        td {
+          padding: 0.25rem 1.2rem;
+        }
+
+        .container {
+          width: 100%;
+          display: none;
+        }
+        
+        .inst-button {
+          padding: 5px 0;
+          position: relative;
+        }
+
+      button {
+        justify-content: center;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+        padding: 8px 28px;
+        color: var(--esp-tools-button-text-color, #fff);
+        background-color: rgb(0, 189, 214);
+        border: none;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 3px 1px -2px, rgba(0, 0, 0, 0.2) 0px 1px 5px 0px;
+      }
+
+      tr {
+        border-bottom: 1px solid #888;
+      }
+      tr:hover {
+        background-color: rgba(0, 189, 214, 0.25);
+       /* color: #FFF;*/
+      }
+      tr.skip:hover {
+        background-color: rgba(0, 0, 0, 0.0);
+       /* color: #FFF;*/
+      }
+      tr.selected {
+        background-color: rgba(0, 189, 214, 0.90);
+        color: #FFF;
+      }
+      tr.selected:hover {
+        background-color: rgba(0, 189, 214, 0.75);
+        color: #FFF;
+      }
+      .radios li {
+        list-style: none;
+        line-height: 2em;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: rgb(46, 48, 62);
+          color: #fff;
+        }
+      }
+
+      .flash{
+        width:100%;
+        text-align: end;
+      }
+      .display{
+        width:100%;
+      }
+      </style>
+    </head>
+    
+    <body onload="installerLoaded();updateFirmware();">
+      <div class="content">
+        <h1>openHASP Web installer</h1>
+
+        <p>Version: <select id="version" name="version">
+          <option value="v0.6.3_497f611">0.6.3 (497f611)</option>      
+          <option value="v0.7.0-rc5_497f611">0.7.0-rc5 (497f611)</option>      
+        </select></p>
+
+        <div>
+
+          <table id="table">
+              <tr class="skip"><th>Model</th><th>Flash</th><th>Display</th><th>Touch</th></tr>
+
+              <tr><td>AZ-Touch MOD<select hidden name="firmware"><option value="az-touch-mod-esp32">az-touch-mod-esp32</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="8MB">8 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
+              <tr><td>D1 R32 Espduino<select hidden name="firmware"><option value="d1-r32-unoshield">d1-r32-unoshield</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9341_adc">ILI9341</option><option value="ILI9486_adc">ILI9486</option></select></td><td>Analog</td></tr>
+              <tr><td>D1 R32 Espduino<select hidden name="firmware"><option value="d1-r32-waveshare">d1-r32-waveshare</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9486">ILI9486</option><option value="ST7789">ST7789</option></select></td><td>XPT2406</td></tr>
+              <tr><td>ESP32 D1-mini<select hidden name="firmware"><option value="d1-mini-esp32">d1-mini-esp32</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
+              <tr><td>ESP32 One<select hidden name="firmware"><option value="esp32-one">esp32-one</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><select  class="display" ><option value="ILI9486">ILI9486</option><option value="ST7796">ST7796</option></select></td><td>XPT2406</td></tr>
+              <tr><td>ESP32 Touchdown<select hidden name="firmware"><option value="esp32-touchdown">esp32-touchdown</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>FT6236</td></tr>
+              <tr><td>FreeTouchDeck<select hidden name="firmware"><option value="freetouchdeck">freetouchdeck</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="8MB">8 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>XPT2406</td></tr>
+              <tr><td>Featherwing&nbsp;<select name="firmware" class="firmware"><option value="huzzah32-featherwing-24">2.4</option><option value="huzzah32-featherwing-35">3.5</option></select></td><td>4 MB<select hidden class="flash" ><option value="4MB">4 MB</option></select></td><td><span class="display">ILI9341</span><select hidden class="display" ><option value=""></option></select></td><td>STMPE610</td></tr>
+              <tr><td>Lanbon L8<select hidden name="firmware"><option value="lanbon_l8">lanbon_l8</option></select></td><td>8 MB<select hidden class="flash" ><option value="8MB">8 MB</option></select></td><td>ST7789V<select hidden class="display" ><option value=""></option></select></td><td>FT5206</td></tr>
+              <tr><td>Lolin D32 Pro v2<select hidden name="firmware"><option value="lolin-d32-pro">lolin-d32-pro</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
+              <tr><td>M5Stack Core2<select hidden name="firmware"><option value="m5stack-core2">m5stack-core2</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9342C<select hidden class="display" ><option value=""></option></select></td><td>FT6336U</td></tr>
+              <tr><td>Makerfabs TFT Touch<select hidden name="firmware"><option value="makerfabs-tft35-cap">makerfabs-tft35-cap</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ILI9488<select hidden class="display" ><option value=""></option></select></td><td>FT6236</td></tr>
+              <tr><td>TTGO T7 v1.5<select hidden name="firmware"><option value="ttgo-t7-v1.5">ttgo-t7-v1.5</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="16MB">16 MB</option></select></td><td>ILI9341<select hidden class="display" ><option value="ILI9341">ILI9341</option></select></td><td>XPT2406</td></tr>
+              <tr><td>WT32-SC01<select hidden name="firmware"><option value="wt32-sc01">wt32-sc01</option></select></td><td><select  class="flash" ><option value="4MB">4 MB</option><option value="16MB">16 MB</option></select></td><td>ST7796<select hidden class="display" ><option value=""></option></select></td><td>FT6336U</td></tr>
+              <tr><td>Yeacreate Nscreen32<select hidden name="firmware"><option value="yeacreate-nscreen32">yeacreate-nscreen32</option></select></td><td>16 MB<select hidden class="flash" ><option value="16MB">16 MB</option></select></td><td>ST7796<select hidden class="display" ><option value=""></option></select></td><td>GT911</td></tr>
+                 
+          </table>
+
+          <p>
+            <div id="firmware"><b>Select your device</b></div>
+            <div id="ota"><b></b></div>
+          </p>
+
+  <div class="container" id="az-touch-mod-esp32">
+
+    <div class="row justify-content-center">
+      <a href="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-mod-24.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-6" data-title="AZ-Touch wall enclosure set with 2.4&quot; touchscreen" data-footer="Copyright <a href='https://www.az-delivery.de/'>az-delivery.de,</a> All Rights Reserved - Used with permission">
+          <img src="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-mod-24.jpg" class="img-fluid">
+      </a>
+      <a href="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-mod-28.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-6" data-title="AZ-Touch wall enclosure set with 2.8&quot; touchscreen" data-footer="Copyright <a href='https://www.az-delivery.de/'>az-delivery.de,</a> All Rights Reserved - Used with permission">
+          <img src="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-mod-28.jpg" class="img-fluid">
+      </a>
+  </div>
+  <div>
+      <a href="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-pcb-front.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-6" data-title="Assembled AZ-Touch PCB" data-footer="Copyright <a href='https://www.az-delivery.de/'>az-delivery.de,</a> All Rights Reserved - Used with permission">more images...</a>
+      <a href="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-pcb-back.jpg" data-toggle="lightbox" data-gallery="example-gallery" rel="lightbox[work]" data-title="AZ-Touch Top PCB with headers" data-footer="Copyright <a href='https://www.az-delivery.de/'>az-delivery.de,</a> All Rights Reserved - Used with permission"></a>
+      <a href="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-pcb-back.jpg" data-toggle="lightbox" data-gallery="example-gallery" rel="lightbox[vacation]" data-title="AZ-Touch Bottom PCB with MCU" data-footer="Copyright <a href='https://www.az-delivery.de/'>az-delivery.de,</a> All Rights Reserved - Used with permission"></a>
+      <a href="https://www.openhasp.com/0.6.3/assets/images/devices/az-touch-pcb-side.jpg" data-toggle="lightbox" data-gallery="example-gallery" rel="lightbox[vacation]" data-title="AZ-Touch PCB Side View" data-footer="Copyright <a href='https://www.az-delivery.de/'>az-delivery.de,</a> All Rights Reserved - Used with permission"></a>
+  </div>
+
+  <div class="container" id="support">Chrome and Edge support flashing devices online from within the browser window.</br>Please use another browser or click 'Download' to flash the firmware offline.</div>
+
+</div>
+
+<div class="container" id="inst-button">
+  <esp-web-install-button id="inst" manifest="assets/json/d1-mini-esp32_ili9341_full_4MB.json" hide-progress>
+      <button slot="activate">INSTALL</button>
+      <span slot="unsupported"></span>
+      <span slot="not-allowed"></span>
+  </esp-web-install-button>
+
+  <a id="link" href=""><button>DOWNLOAD</button></a>
+
+  <div class="container" id="support">Chrome and Edge support flashing devices online from within the browser window.</br>Please use another browser or click 'Download' to flash the firmware offline.</div>
+
+</div>
+
+<div class="footer">
+  <a href="https://www.openhasp.com/0.6.3/">openHASP v0.6.3</a> Web Installer powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+</div>
+
+</div>
+</div>
+
+
+<script>
+  function updateFirmware(){
+      document.querySelectorAll('tr').forEach(function(row) {
+        row.querySelectorAll('select[name="firmware"]').forEach(function(item) {
+          // let firmware = document.getElementById('firmware');
+          firmware = item.value.toLowerCase();
+
+          // Adjust Display driver for Featherwing displays
+          if (firmware == 'huzzah32-featherwing-24') {
+            row.querySelectorAll('span[class="display"]').forEach(function(span) {
+              span.innerHTML = 'ILI9341';
+            });
+          }
+          if (firmware == 'huzzah32-featherwing-35') {
+            row.querySelectorAll('span[class="display"]').forEach(function(span) {
+              span.innerHTML = 'HX8357D';
+            });
+          }
+
+        });
+      });
+  }
+
+  function updateSelected(){
+    updateFirmware();
+    document.querySelectorAll('tr[class="selected"]').forEach( row => {
+      let firmware="";
+      let display="";
+      let flash="";
+
+      row.querySelectorAll('select[name="firmware"]').forEach(function(item) {
+        // let firmware = document.getElementById('firmware');
+        firmware = item.value.toLowerCase();
+      });
+
+      row.querySelectorAll('select[class="display"]').forEach(function(item) {
+        // let display = document.getElementById('display');
+        display = item.value.toLowerCase();
+      });
+
+      row.querySelectorAll('select[class="flash"]').forEach(function(item) {
+        // let flash = document.getElementById('flash');
+        flash = item.value
+      });
+
+      if (display != "") display = "_" + display;
+      if (flash != "") flash = "_" + flash;
+
+      let manifest = "json/" + firmware + display + "_full" + flash + ".json";
+      
+      const button = document.querySelector('esp-web-install-button');
+          button.manifest = manifest;
+        //  button.classList.remove('invisible');
+      
+      var version = document.getElementById("version");
+
+      var bin_file = firmware + display + "_full" + flash + "_" + version.value + ".bin";
+      var bin = document.getElementById("firmware");
+      bin.innerHTML = "<b>Full firmware:</b> <a href=\"/firmware/" + bin_file + "\">" + bin_file + "</a>";
+
+      var ota_file = firmware + display + "_ota_" + version.value + ".bin"
+      var ota = document.getElementById("ota");
+      ota.innerHTML = "<b>OTA firmware:</b> <a href=\"/firmware/" + ota_file + "\">" + ota_file + "</a>";
+
+      var link = document.getElementById("link");
+      link.href =  "firmware/" + firmware + display + "_full" + flash + "_" + version.value + ".bin";
+
+      var buttons = document.getElementById("inst-button");
+      buttons.style.display = 'block';
+    });
+  }
+
+  function selectedRow(){
+      
+      var index,
+          table = document.getElementById("table");
+  
+      for(var i = 1; i < table.rows.length; i++)
+      {
+          table.rows[i].onclick = function()
+          {
+                // remove the background from the previous selected row
+              if(typeof index !== "undefined"){
+                  table.rows[index].classList.toggle("selected");
+              }
+              // console.log(typeof index);
+              // get the selected row index
+              index = this.rowIndex;
+              // add class selected to the row
+              this.classList.toggle("selected");
+
+            //  console.log(typeof index);
+              updateSelected();
+            };
+      }
+      
+  }
+  selectedRow();
+  updateSelected();
+
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const fw = urlParams.get('fw')
+  console.log(fw);
+
+  document.querySelectorAll('select[class=firmware]').forEach(sel =>
+    sel.addEventListener("change", (sel) => {
+      // console.log(sel);
+      // let flash = document.getElementById('flash');
+      // flash.value = sel.target.value
+      updateSelected();
+    }
+  ));
+
+  document.querySelectorAll('select[class=flash]').forEach(sel =>
+    sel.addEventListener("change", (sel) => {
+      // console.log(sel);
+      // let flash = document.getElementById('flash');
+      // flash.value = sel.target.value
+      updateSelected();
+    }
+  ));
+  
+  document.querySelectorAll('select[class=display]').forEach(sel =>
+    sel.addEventListener("change", (sel) => {
+    // console.log(sel);
+    // let display = document.getElementById('display');
+    // display.value = sel.target.value
+    updateSelected();
+    }
+  ));
+
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "854dde487cc84d41ac584168a207f277"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
